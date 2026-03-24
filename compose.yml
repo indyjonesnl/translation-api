@@ -1,0 +1,16 @@
+services:
+  api:
+    build: .
+    container_name: translate-gemma-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_NAME=translategemma:4b
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+networks:
+  default:
+    name: translation-network
